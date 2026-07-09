@@ -17,9 +17,9 @@ st.caption("Rotina para gerar PDFs a partir dos dados da defesa/qualificação."
 def default_examiners() -> pd.DataFrame:
     return pd.DataFrame(
         [
-            {"Nome": "Bianca Callegari", "Título": "Profa. Dra.", "Instituição": "UFPA", "Função": "membro titular"},
-            {"Nome": "Bruna Rafaela da Silva Sousa", "Título": "Profa. Dra.", "Instituição": "UFPA", "Função": "membro titular"},
-            {"Nome": "Railson Cruz Salomão", "Título": "Prof. Dr.", "Instituição": "UFPA", "Função": "membro titular"},
+            {"Nome": "Avaliador 1", "Título": "Profa. Dra.", "Instituição": "UFPA", "Função": "membro titular"},
+            {"Nome": "Avaliador 2", "Título": "Profa. Dra.", "Instituição": "UFPA", "Função": "membro titular"},
+            {"Nome": "Avaliador 3", "Título": "Prof. Dr.", "Instituição": "UFPA", "Função": "membro titular"},
         ]
     )
 
@@ -34,13 +34,13 @@ with st.sidebar:
 
     st.header("Cabeçalho institucional")
     university = st.text_input("Universidade", "Universidade Federal do Pará")
-    institute = st.text_input("Instituto", "Instituto de Ciências Biológicas")
-    program = st.text_input("Programa", "Programa de Pós-graduação em Neurociências e Biologia Celular")
+    institute = st.selectbox("Indique a sub-unidade", ["Instituto de Ciências Biológicas","Núcleo de Medicina Tropical"],index=0)
+    program = st.selectbox("Indique o Programa", ["Programa de Pós-graduação em Neurociências e Biologia Celular","Programa de Pós-graduação em Saúde na Amazônia"],index=0)
 
 left, right = st.columns([1.15, 1])
 
 with left:
-    st.subheader("Dados da sessão")
+    st.subheader("Dados da sessão pública")
     student_name = st.text_input("Nome do discente", "João David Monteiro Costa")
     title = st.text_area(
         "Título do trabalho",
@@ -56,10 +56,11 @@ with right:
     defense_time = st.time_input("Horário", value=time(18, 30), step=300)
     location = st.text_input("Local/sala/link", "Sala Virtual https://meet.google.com/dec-tnmf-rnv")
 
-    st.subheader("Presidência")
-    president_name = st.text_input("Presidente da banca", advisor_name)
-    president_title = st.selectbox("Título do presidente", ["Prof. Dr.", "Profa. Dra.", "Prof.", "Profa."], index=0)
-    president_institution = st.text_input("Instituição do presidente", "UFPA")
+
+st.subheader("Presidência")
+president_name = st.text_input("Presidente da banca", advisor_name)
+president_title = st.selectbox("Título do presidente", ["Prof. Dr.", "Profa. Dra.", "Prof.", "Profa."], index=0)
+president_institution = st.text_input("Instituição do presidente", "UFPA")
 
 st.divider()
 
